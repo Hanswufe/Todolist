@@ -1,5 +1,16 @@
+const fs = require("fs")
+
 exports.asyncReadFile = function (path) {
-    return 1
+    return new Promise(function (resolve, reject) {
+        fs.readFile(path, 'utf-8', function (err, data) {
+          if (err) {
+            reject(err)
+          }
+          resolve(data)
+        })
+      }).catch((err) => {
+        return err
+      })
 }
   
 exports.asyncWriteFile = function (string, path) {

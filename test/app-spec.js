@@ -27,8 +27,8 @@ const {
         })
       })
   
-      it("should get specific task when request url patten is '/api/tasks/{id}'", (done) => {
-        request(app).get('/api/tasks/{2}').expect(200).expect({
+      it("should get specific task when request url patten is '/api/tasks/:id'", (done) => {
+        request(app).get('/api/tasks/2').expect(200).expect({
             "id": 2,
             "content": "Restful API test",
             "createdTime": "2019-05-16T00:00:00Z"
