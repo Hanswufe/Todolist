@@ -91,42 +91,15 @@ const {
       })
     })
     describe("delete request", () => {
-        afterEach(async function () {
-            await asyncWriteFile(JSON.stringify([{
-                "id": 1,
-                "content": "Restful API homework",
-                "createdTime": "2019-05-15T00:00:00Z"
-              },
-              {
-                "id": 2,
-                "content": "Restful API test",
-                "createdTime": "2019-05-16T00:00:00Z"
-              },{
-                "id": 3,
-                "content": "Restful API exam",
-                "createdTime": "2019-05-17T00:00:00Z"
-              }
-            ]), "./test/fixture.json")
-        })
         it("should delete the task when its id has already existed in the datasource", (done) => {
-          request(app).delete('/api/tasks/{3}').expect(201).expect([{
-              "id": 1,
-              "content": "Restful API homework",
-              "createdTime": "2019-05-15T00:00:00Z"
-            },
-            {
-              "id": 2,
-              "content": "Restful API test",
-              "createdTime": "2019-05-16T00:00:00Z"
-            }
-          ]).end((err, res) => {
+          request(app).delete('/api/tasks/2').expect(204).end((err, res) => {
             if (err) throw err;
             done()
           })
         })
     
         it("should not delete the task when the corresponding id does not exist in the datasource", (done) => {
-          request(app).delete('/api/tasks/{5}').expect(400).end((err, res) => {
+          request(app).delete('/api/tasks/5').expect(404).end((err, res) => {
             if (err) throw err;
             done()
           })

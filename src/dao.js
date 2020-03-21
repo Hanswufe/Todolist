@@ -14,5 +14,11 @@ exports.asyncReadFile = function (path) {
 }
   
 exports.asyncWriteFile = function (string, path) {
-    return 1
+  return new Promise(function (resolve, reject) {
+    fs.writeFile(path, string, function (err) {
+      reject(err)
+    })
+  }).catch((err) => {
+    return err
+  })
 }
